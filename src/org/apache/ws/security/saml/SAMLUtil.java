@@ -99,7 +99,9 @@ public class SAMLUtil {
         byte[] key = pwcb.getKey();
         
         if (key != null) {
-            return new SAMLKeyInfo(assertion, key);
+            SAMLKeyInfo samlKeyInfo = new SAMLKeyInfo(assertion, key);
+            samlKeyInfo.setSecretFromCallback(true);
+            return samlKeyInfo;
         } else {
             Iterator statements = assertion.getStatements();
             while (statements.hasNext()) {
